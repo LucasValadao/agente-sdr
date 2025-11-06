@@ -13,6 +13,11 @@ pids
 *.seed
 *.pid.lock
 
+# secrets
+.env
+
+#backend
 backend/node_modules/
 backend/dist/
 backend/.DS_Store
+backend/.env
