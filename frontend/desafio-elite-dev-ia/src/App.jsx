@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Send, Bot, User } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
@@ -81,60 +82,77 @@ export default function App() {
   };
 
   return (
-    <div
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4"
-      aria-label="Assistente virtual"
-    >
-      <div className="w-full max-w-md bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col">
-        <header className="bg-blue-600 text-white text-center py-3 font-semibold">
-          Assistente SDR - Tech
-        </header>
+    
+    <div className="flex flex-col h-screen bg-gradient-to-br from-black-50 via-white to-gray-50 font-sans">
+      {/* HEADER */}
+      
+      <header className="bg-gradient-to-r from-black-600 to-indigo-600 text-white py-4 px-6 shadow-md flex items-center justify-between">
+        <h1 className="text-lg font-semibold tracking-wide">
+          💬 Assistente SDR - Tech
+        </h1>
+      </header>
 
-        <main className="flex-1 overflow-y-auto p-3">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`my-2 p-2 rounded-lg ${
-                msg.role === "user"
-                  ? "bg-blue-100 text-right"
-                  : "bg-gray-200 text-left"
-              }`}
-              aria-label={
-                msg.role === "user"
-                  ? "Mensagem do usuário"
-                  : "Mensagem do assistente"
-              }
-            >
-              {msg.content}
-            </div>
-          ))}
-          {loading && (
-            <div className="italic text-gray-500 animate-pulse">
-              Assistente digitando...
-            </div>
-          )}
-          <div ref={chatEndRef} />
-        </main>
-
-        <footer className="flex p-2 border-t">
-          <input
-            type="text"
-            className="flex-1 border rounded-lg px-2 py-1 focus:outline-none"
-            placeholder="Digite sua mensagem..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyPress}
-            aria-label="Campo de mensagem"
-          />
-          <button
-            onClick={sendMessage}
-            className="ml-2 bg-blue-600 text-white rounded-lg px-4 py-1"
-            aria-label="Enviar mensagem"
+      {/* MAIN CHAT */}
+      <main className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            className={`flex items-end ${
+              msg.role === "user" ? "justify-end" : "justify-start"
+            }`}
           >
-            Enviar
-          </button>
-        </footer>
-      </div>
+            {msg.role === "assistant" && (
+              <div className="flex items-end space-x-2">
+                <div className="bg-black-100 rounded-full p-2 shadow-sm">
+                  <Bot className="w-4 h-4 text-black-600" />
+                </div>
+                <div className="bg-gray-200 text-gray-800 px-4 py-3 rounded-2xl rounded-bl-none shadow-sm max-w-[75%]">
+                  {msg.content}
+                </div>
+              </div>
+            )}
+
+            {msg.role === "user" && (
+              <div className="flex items-end space-x-2">
+                <div className="bg-black-600 text-white px-4 py-3 rounded-2xl rounded-br-none shadow-sm max-w-[75%]">
+                  {msg.content}
+                </div>
+                <div className="bg-black-100 rounded-full p-2 shadow-sm">
+                  <User className="w-4 h-4 text-black-600" />
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+
+        {loading && (
+          <div className="flex items-center space-x-2 text-gray-500 text-sm italic animate-pulse">
+            <Bot className="w-4 h-4" />
+            <span>Assistente digitando...</span>
+          </div>
+        )}
+
+        <div ref={chatEndRef} />
+      </main>
+
+      {/* FOOTER */}
+      <footer className="flex items-center border-t border-gray-200 p-4 bg-white shadow-inner">
+        <input
+          type="text"
+          className="flex-1 border border-gray-300 rounded-full px-4 py-2 mr-2 focus:ring-2 focus:ring-black-500 focus:outline-none"
+          placeholder="Digite sua mensagem..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+        />
+        <button
+          onClick={sendMessage}
+          disabled={loading}
+          className="bg-black-600 hover:bg-black-700 text-white p-2 rounded-full transition disabled:opacity-60"
+        >
+          <Send size={18} />
+        </button>
+      </footer>
     </div>
   );
 }
