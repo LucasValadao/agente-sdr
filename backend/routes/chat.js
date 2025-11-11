@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   try {
     const { messages } = req.body;
     if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: "Mensagens inválidas." });
+      return res.status(400).json({ error: "Mensagens invalidas." });
     }
 
     const reply = await getChatResponse(messages);

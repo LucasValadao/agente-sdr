@@ -14,29 +14,26 @@ const horariosDisponiveis = [
   "terça-feira às 14h",
 ];
 
-async function agendarReuniao(lead, horarioEscolhido) {
-  console.log("Agendando reuniao:", lead.nome, horarioEscolhido);
-  return {
-    link: `https://cal.com/fake-sdr/${lead.nome.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`,
-    horario: horarioEscolhido,
-  };
-}
-
 function extrairDadosDoLead(messages) {
-  const texto = messages.map(m => m.content.toLowerCase()).join(" ");
-  const lead = {};
+   if (!Array.isArray(messages)) {
+    console.warn("nao eh um array.", messages);
+    return "";
+  }
 
-  const nome = texto.match(/meu nome é ([a-záéíóúãõç\s]+)/);
-  const email = texto.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/);
-  const empresa = texto.match(/empresa ([a-z0-9áéíóúãõç\s]+)/);
-  const interesse = texto.match(/(interessad[oa]|preciso|quero|desejo).{0,30}/);
+  return messages
+    .map((m, idx) => {
+      const role = (m?.role || "user").toString().toLowerCase();
+      const content = m?.content || m?.text || "";
 
-  if (nome) lead.nome = nome[1].trim();
-  if (email) lead.email = email[0].trim();
-  if (empresa) lead.empresa = empresa[1].trim();
-  if (interesse) lead.interesse = interesse[0].trim();
+      if (!content.trim()) {
+        return "";
+      }
 
-  return lead;
+      const prefix = role === "assistant" ? "Assistente" : "Usuário";
+      return `${prefix}: ${content}`;
+    })
+    .filter(Boolean)
+    .join("\n");
 }
 
 
