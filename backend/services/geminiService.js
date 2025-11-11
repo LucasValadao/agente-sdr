@@ -18,14 +18,24 @@ function extrairDadosDoLead(messages) {
   const texto = messages.map(m => m.content.toLowerCase()).join(" ");
   const lead = {};
 
+  const nomeEempresa =
+    texto.match(/meu nome é ([a-záéíóúãõç\s]+)(?: e (?:trabalho (?:na|no|em) )?| da | do )([a-z0-9áéíóúãõç\s]+)/) ||
+    texto.match(/sou ([a-záéíóúãõç\s]+) (?:da|do|de) ([a-z0-9áéíóúãõç\s]+)/);
+
   const nome = texto.match(/meu nome é ([a-záéíóúãõç\s]+)/);
   const email = texto.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/);
   const empresa = texto.match(/empresa ([a-z0-9áéíóúãõç\s]+)/);
   const interesse = texto.match(/(interessad[oa]|preciso|quero|desejo).{0,30}/);
 
-  if (nome) lead.nome = nome[1].trim();
+  if (nomeEempresa) {
+    lead.nome = nomeEempresa[1].trim();
+    lead.empresa = nomeEempresa[2].trim();
+  } else {
+    if (nome) lead.nome = nome[1].trim();
+    if (empresa) lead.empresa = empresa[1].trim();
+  }
+
   if (email) lead.email = email[0].trim();
-  if (empresa) lead.empresa = empresa[1].trim();
   if (interesse) lead.interesse = interesse[0].trim();
 
   return lead;
@@ -51,7 +61,7 @@ export async function getChatResponse(messages) {
 
     let respostaFinal = "";
 
-    if (/sim|quero|agendar|reunião/.test(lastMsg)) {
+    if (/agendar|reunião/.test(lastMsg)) {
       const horario = horariosDisponiveis[0];
       const agendamento = await criarConviteCalendly(lead, horario);
       respostaFinal = `Agendei sua reuniao para ${agendamento.horario}.
