@@ -19,14 +19,17 @@ cd ../frontend/desafio-elite-dev-ia
 npm install
 ```
 
-## 3 - Configure o .env.example trocando a key do gemini, os tokens do pipefy e calendly, e insira o ID do pipe que será utilizado e o ID do usuario do calendly.
+## 3 - Configure o .env.example.
+Troque a key do gemini, os tokens do pipefy e calendly, e insira o ID do pipe que será utilizado e o ID do usuario do calendly.
 
 ## 4 - Execute os serviços
-```bash cd backend
+```bash 
+cd backend
 npm run dev
 ```
 Em outro terminal execute:
-```bash cd frontend/desafio-elite-dev-ia
+```bash 
+cd frontend/desafio-elite-dev-ia
 npm run dev
 ```
 
@@ -37,6 +40,8 @@ Inicialmente o cliente inicia o chat e informa nome e empresa, o agente coleta e
 Ao confirmar interesse, o assistente sugere horários e realiza o agendamento via Calendly registrando o lead (com status) no Pipefy.
 
 ## Requisitos Técnicos
-Node.js v18+
-NPM v9+
+Node.js v18+, 
+NPM v9+, 
 Navegador compatível com ES2022
+
+## Exemplo de prompt do fluxo completo funcional

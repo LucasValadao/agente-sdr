@@ -61,7 +61,7 @@ export async function getChatResponse(messages) {
 
     let respostaFinal = "";
 
-    if (/agendar|reunião/.test(lastMsg)) {
+    if (/sim|quero|agendar|confimo|reunião/.test(lastMsg)) {
       const horario = horariosDisponiveis[0];
       const agendamento = await criarConviteCalendly(lead, horario);
       respostaFinal = `Agendei sua reuniao para ${agendamento.horario}.
