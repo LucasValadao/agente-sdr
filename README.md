@@ -45,3 +45,4 @@ NPM v9+,
 Navegador compatível com ES2022
 
 ## Exemplo de prompt do fluxo completo funcional
+![alt text](image.png)
