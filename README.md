@@ -21,6 +21,7 @@ npm install
 
 ## 3 - Configure o .env.example.
 Troque a key do gemini, os tokens do pipefy e calendly, e insira o ID do pipe que será utilizado e o ID do usuario do calendly.
+Por fim, remova o ".example" do .env deixando apenas o ".env" .
 
 ## 4 - Execute os serviços
 ```bash 
