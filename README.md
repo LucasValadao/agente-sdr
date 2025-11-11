@@ -8,7 +8,7 @@ cd Desafio-elite-dev-IA
 ```
 
 ## 2 - Instalar as dependências
- 2.1 - 
+### 2.1 - 
  ```bash 
  cd backend
  npm install 
