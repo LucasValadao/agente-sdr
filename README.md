@@ -1,4 +1,4 @@
-# Desafio-elite-dev-IA
+# agente-sdr
 Desenvolvimento de um agente SDR automatizado usando OpenAPI.
 
 ## 1 - Clonar o projeto
