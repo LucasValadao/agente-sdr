@@ -3,8 +3,8 @@ Desenvolvimento de um agente SDR automatizado usando OpenAPI.
 
 ## 1 - Clonar o projeto
 ```bash 
-git clone https://github.com/LucasValadao/Desafio-elite-dev-IA.git
-cd Desafio-elite-dev-IA 
+git clone https://github.com/LucasValadao/agente-sdr.git
+cd agente-sdr 
 ```
 
 ## 2 - Instalar as dependências
@@ -15,7 +15,7 @@ cd Desafio-elite-dev-IA
  ```
 ### 2.2 - 
 ```bash 
-cd ../frontend/desafio-elite-dev-ia
+cd ../frontend/agente-sdr
 npm install
 ```
 
@@ -30,7 +30,7 @@ npm run dev
 ```
 Em outro terminal execute:
 ```bash 
-cd frontend/desafio-elite-dev-ia
+cd frontend/agente-sdr
 npm run dev
 ```
 
